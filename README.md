@@ -1,4 +1,6 @@
 # Asynchronous-functions.Promises
+https://greenkrok.github.io/Asynchronous-functions.Promises/
+
   1) Создать одну лошадь
   
     - Для начала создадим функцию, которая будет принимать два параметра: имя скакуна, и время его финиширования (задаем вручную);
