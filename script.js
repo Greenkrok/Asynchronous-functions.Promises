@@ -10,3 +10,12 @@
 //  - Создадим новую функцию, которая будет генерировать случайное время от 0 до 5 секунд;
 //  - Заменим параметр “время” на случайное.
 
+function race(name, time){
+    return new Promise(function(resolve, reject){
+        setTimeout(function(){
+            resolve(console.log(`Лошадь по кличке ${name} финишировал за ${time/1000} секунд`));
+        },time);
+    });
+};
+
+race('Вася', 3000);
