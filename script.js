@@ -10,12 +10,24 @@
 //  - Создадим новую функцию, которая будет генерировать случайное время от 0 до 5 секунд;
 //  - Заменим параметр “время” на случайное.
 
+result = null;
+
 function race(name, time){
+    name = 'Вася';
+    time = 3;
     return new Promise(function(resolve, reject){
         setTimeout(function(){
-            resolve(console.log(`Лошадь по кличке ${name} финишировал за ${time/1000} секунд`));
-        },time);
+            if(!name || !time) reject('error');
+            result = `Лошадь по кличке ${name} финишировал за ${time} секунд`;
+            resolve(result);
+        },time*1000);
     });
 };
 
-race('Вася', 3000);
+race().then(function (result) {
+    console.log(result); // Получаем данные при успехе.
+ }).catch(function (error) {
+    console.log(error); // Получаем ошибку.
+ }).finally(function(){
+    console.log('Скачки завершёны'); // Выполнится в любом случае.
+ })
