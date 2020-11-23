@@ -3,31 +3,43 @@
 //  - Функция должна возвращать промис, который через заданное время, будет выводить в консоль сообщение, что лошадь по кличке “имя скакуна” финишировал за “время” секунд.
 
 // 2. Добавим ещё пару лошадей
-//  - Создать цикл из трех итераций, в каждой из которых будет запускаться функцию-промис, принимающая имя скакуна, и время его финиширования;
+//  - Создать цикл из трех итераций, в каждой из которых будет запускаться функция-промис, принимающая имя скакуна, и время его финиширования;
 //  - Выведем в консоль сообщение, что скакун “имя скакуна” финишировал за за “время” секунд.
 
 // 3. Поменяем время на случайное
 //  - Создадим новую функцию, которая будет генерировать случайное время от 0 до 5 секунд;
 //  - Заменим параметр “время” на случайное.
 
+let horses = [
+    {name: 'Тагай', time: getRandom()},
+    {name: 'Дабар', time: getRandom()},
+    {name: 'Абай', time: getRandom()}
+];
+
 result = null;
 
 function race(name, time){
-    name = 'Вася';
-    time = 3;
     return new Promise(function(resolve, reject){
         setTimeout(function(){
-            if(!name || !time) reject('error');
+            if(!time) reject(`${name} сломалась`);
             result = `Лошадь по кличке ${name} финишировал за ${time} секунд`;
             resolve(result);
         },time*1000);
     });
 };
 
-race().then(function (result) {
-    console.log(result); // Получаем данные при успехе.
- }).catch(function (error) {
-    console.log(error); // Получаем ошибку.
- }).finally(function(){
-    console.log('Скачки завершёны'); // Выполнится в любом случае.
- })
+function getRandom(){
+    return Math.round(Math.random()*5);
+}
+
+console.log('Скачки начались' + '\n' + '\n');
+
+horses.forEach(horse => {
+    race(horse.name, horse.time).then(function (result) {
+        console.log(result); // Получаем данные при успехе.
+     }).catch(function (error) {
+        console.log(error); // Получаем ошибку.
+     }).finally(function(){
+        console.log('Закончила' + '\n' + '\n'); // Выполнится в любом случае.
+     })
+});
